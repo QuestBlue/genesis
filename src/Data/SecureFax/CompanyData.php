@@ -13,17 +13,19 @@ class CompanyData
     /**
      * Create a new company data instance
      *
-     * @param string $id       Unique identifier of the company
-     * @param string $name     Name of the company
+     * @param string $id Unique identifier of the company
+     * @param string $name Name of the company
      * @param string $timezone Company's operating timezone
-     * @param bool   $locked   Whether the company is currently locked
+     * @param bool $locked Whether the company is currently locked
      */
     public function __construct(
         public string $id,
         public string $name,
         public string $timezone,
-        public bool $locked,
-    ) {}
+        public bool   $locked,
+    )
+    {
+    }
 
     /**
      * Create a CompanyData instance from an array
@@ -46,7 +48,7 @@ class CompanyData
             id: $data['id'],
             name: $data['name'],
             timezone: $data['timezone'],
-            locked: (bool) $data['locked'],
+            locked: $data['locked'],
         );
     }
 }
