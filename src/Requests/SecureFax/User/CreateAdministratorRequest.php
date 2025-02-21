@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace QuestBlue\Genesis\Requests\SecureFax\User;
 
+use JsonException;
+use QuestBlue\Genesis\Data\SecureFax\UserData;
+use QuestBlue\Genesis\Enums\Service;
+use QuestBlue\Genesis\Requests\BaseRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -21,7 +25,7 @@ use Saloon\Traits\Body\HasJsonBody;
  * Administrators created through this endpoint will have full administrative
  * privileges for their assigned company.
  */
-class CreateAdministratorRequest extends Request implements HasBody
+class CreateAdministratorRequest extends BaseRequest implements HasBody
 {
     use HasJsonBody;
 
@@ -35,13 +39,13 @@ class CreateAdministratorRequest extends Request implements HasBody
     /**
      * Initialize a new administrator creation request
      *
-     * @param string|null $fullname The administrator's full name (optional)
+     * @param string|null $fullName The administrator's full name (optional)
      * @param string      $email    The administrator's email address (used for login)
      * @param string      $password The administrator's initial password
      * @param string      $company  The UUID of the company the administrator will manage
      */
     public function __construct(
-        protected readonly ?string $fullname,
+        protected readonly ?string $fullName,
         protected readonly string $email,
         protected readonly string $password,
         protected readonly string $company,
@@ -63,7 +67,7 @@ class CreateAdministratorRequest extends Request implements HasBody
     protected function defaultBody(): array
     {
         return [
-            'fullname' => $this->fullname,
+            'fullname' => $this->fullName,
             'email'    => $this->email,
             'password' => $this->password,
             'company'  => $this->company,
@@ -77,6 +81,29 @@ class CreateAdministratorRequest extends Request implements HasBody
      */
     public function resolveEndpoint(): string
     {
-        return '/manager/user';
+        return '/manager/administrator';
+    }
+
+    /**
+     * Resolves and returns the appropriate service.
+     *
+     * @return Service The resolved service instance.
+     */
+    public function resolveService(): Service
+    {
+        return Service::SECURE_FAX;
+    }
+
+    /**
+     * Creates a Data Transfer Object (DTO) from the given response.
+     *
+     * @param  Response  $response  The HTTP response containing user data in JSON format
+     *
+     * @return mixed The created DTO from the response data
+     * @throws JsonException
+     */
+    public function createDtoFromResponse(Response $response): mixed
+    {
+        return UserData::fromArray($response->json('data.user'));
     }
 }
