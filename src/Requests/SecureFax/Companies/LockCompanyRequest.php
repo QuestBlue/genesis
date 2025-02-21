@@ -9,7 +9,6 @@ use QuestBlue\Genesis\Enums\Service;
 use QuestBlue\Genesis\Requests\BaseRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
@@ -74,7 +73,6 @@ class LockCompanyRequest extends BaseRequest implements HasBody
      */
     public function createDtoFromResponse(Response $response): mixed
     {
-        $data = $response->json('data.company');
-        return CompanyData::fromArray($data);
+        return CompanyData::fromArray($response->json('data.company'));
     }
 }
