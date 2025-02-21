@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace QuestBlue\Genesis;
 
 use QuestBlue\Genesis\Enums\Service;
+use QuestBlue\Genesis\Exceptions\GenesisException;
 use QuestBlue\Genesis\Resource\SecureFax\SecureFaxResource;
 use Saloon\Http\Auth\BasicAuthenticator;
 use Saloon\Http\Auth\HeaderAuthenticator;
@@ -15,6 +16,7 @@ use Saloon\Http\PendingRequest;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\Traits\Plugins\AcceptsJson;
+use Throwable;
 
 /**
  * QuestBlue API Connector
@@ -84,6 +86,7 @@ class Genesis extends Connector
         $this->configureServiceFromRequest($request);
         return parent::createPendingRequest($request, $mockClient);
     }
+
 
     /**
      * Configure the service based on the given request.
@@ -177,4 +180,18 @@ class Genesis extends Connector
     {
         return new SecureFaxResource($this);
     }
+
+    /**
+     * Retrieve the request exception based on the response and an optional sender exception.
+     *
+     * @param  Response  $response  The response object that provides details about the request.
+     * @param  Throwable|null  $senderException  An optional exception that originated from the sender.
+     *
+     * @return Throwable|null The exception generated based on the response, or null if not applicable.
+     */
+    public function getRequestException(Response $response, ?Throwable $senderException): ?Throwable
+    {
+        return new GenesisException($response);
+    }
+
 }
