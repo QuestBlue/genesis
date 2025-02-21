@@ -6,7 +6,9 @@ namespace QuestBlue\Genesis\Requests\SecureFax\Did;
 
 use QuestBlue\Genesis\Enums\Service;
 use QuestBlue\Genesis\Requests\BaseRequest;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
+use Saloon\Traits\Body\HasJsonBody;
 
 /**
  * DID Deletion Request Handler
@@ -17,8 +19,10 @@ use Saloon\Enums\Method;
  * - Disassociate it from any linked company
  * - Free up the number for potential future use
  */
-class DeleteDidRequest extends BaseRequest
+class DeleteDidRequest extends BaseRequest implements HasBody
 {
+    use HasJsonBody;
+
     /**
      * The HTTP method for this request
      *
@@ -31,9 +35,7 @@ class DeleteDidRequest extends BaseRequest
      *
      * @param string $didId The unique identifier of the DID to be deleted
      */
-    public function __construct(protected readonly string $didId)
-    {
-    }
+    public function __construct(protected readonly string $didId, protected readonly string $companyId) {}
 
     /**
      * Specify the service this request belongs to
@@ -44,6 +46,24 @@ class DeleteDidRequest extends BaseRequest
     {
         return Service::SECURE_FAX;
     }
+
+    /**
+     * Construct the request payload for DID creation
+     *
+     * Builds an array containing all necessary and optional DID information
+     * that will be converted to JSON for the request body.
+     *
+     * @return array{
+     *     company: string,
+     * }
+     */
+    protected function defaultBody(): array
+    {
+        return [
+            'company'     => $this->companyId,
+        ];
+    }
+
 
     /**
      * Define the API endpoint for DID deletion
