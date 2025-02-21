@@ -61,6 +61,16 @@ class CreateCompanyRequest extends BaseRequest implements HasBody
     }
 
     /**
+     * Specify the service this request belongs to
+     *
+     * @return Service The service enum value for SecureFax
+     */
+    public function resolveService(): Service
+    {
+        return Service::SECURE_FAX;
+    }
+
+    /**
      * Create a DTO from the API response
      *
      * Transforms the API response into a structured CompanyData object
@@ -73,17 +83,6 @@ class CreateCompanyRequest extends BaseRequest implements HasBody
      */
     public function createDtoFromResponse(Response $response): mixed
     {
-        $data = $response->json('data.company');
-        return CompanyData::fromArray($data);
-    }
-
-    /**
-     * Specify the service this request belongs to
-     *
-     * @return Service The service enum value for SecureFax
-     */
-    public function resolveService(): Service
-    {
-        return Service::SECURE_FAX;
+        return CompanyData::fromArray($response->json('data.company'));
     }
 }
