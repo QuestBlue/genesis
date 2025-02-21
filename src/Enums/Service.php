@@ -43,7 +43,7 @@ enum Service
     public function sandboxBaseUrl(): string
     {
         return match ($this) {
-            self::SECURE_FAX => 'http://api33.test:8081/v3/securefax/',
+            self::SECURE_FAX => 'http://apiv3.test/v3/securefax/',
         };
     }
 }

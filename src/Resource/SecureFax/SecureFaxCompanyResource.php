@@ -99,4 +99,5 @@ class SecureFaxCompanyResource extends Resource
     {
         return $this->connector->send(new UnlockCompanyRequest($id));
     }
+
 }

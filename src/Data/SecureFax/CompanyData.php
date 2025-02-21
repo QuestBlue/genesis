@@ -8,7 +8,7 @@ namespace QuestBlue\Genesis\Data\SecureFax;
  * Represents a company entity in the SecureFax system with its essential properties.
  * This DTO is used for transferring company data between different parts of the application.
  */
-class CompanyData
+readonly class CompanyData
 {
     /**
      * Create a new company data instance

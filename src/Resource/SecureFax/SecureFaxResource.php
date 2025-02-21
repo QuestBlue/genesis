@@ -26,4 +26,20 @@ class SecureFaxResource extends Resource
     {
         return new SecureFaxCompanyResource($this->connector);
     }
+
+    /**
+     * Access the users resource of the SecureFax API.
+     *
+     * @return SecureFaxUsersResource The resource for managing user-related operations.
+     */
+    public function users(): SecureFaxUsersResource
+    {
+        return new SecureFaxUsersResource($this->connector);
+    }
+
+    public function did(): SecureFaxDidResource
+    {
+        return new SecureFaxDidResource($this->connector);
+    }
+
 }

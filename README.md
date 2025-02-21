@@ -66,12 +66,12 @@ $genesis->secureFax()
 ```php
 // Create a new administrator
 $adminResponse = $genesis->secureFax()
-    ->administrator()
+    ->manager()
     ->create(
         email: 'admin@example.com',
         password: 'secure-password',
         company: $company->id,
-        fullname: 'John Doe'
+        fullName: 'John Doe'
     );
 ```
 
