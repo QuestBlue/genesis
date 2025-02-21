@@ -74,7 +74,6 @@ class UnlockCompanyRequest extends BaseRequest implements HasBody
      */
     public function createDtoFromResponse(Response $response): mixed
     {
-        $data = $response->json('data.company');
-        return CompanyData::fromArray($data);
+        return CompanyData::fromArray($response->json('data.company'));
     }
 }
