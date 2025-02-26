@@ -33,7 +33,7 @@ class DeleteDidRequest extends BaseRequest implements HasBody
     /**
      * Initialize a new DID deletion request
      *
-     * @param  string  $didId  The unique identifier of the DID to be deleted
+     * @param string $didId The unique identifier of the DID to be deleted
      */
     public function __construct(protected readonly string $didId, protected readonly string $companyId) {}
 
@@ -45,19 +45,6 @@ class DeleteDidRequest extends BaseRequest implements HasBody
     public function resolveService(): Service
     {
         return Service::SECURE_FAX;
-    }
-
-    /**
-     * Define the API endpoint for DID deletion
-     *
-     * Constructs the endpoint URL by incorporating the DID's
-     * unique identifier into the deletion path.
-     *
-     * @return string The API endpoint path
-     */
-    public function resolveEndpoint(): string
-    {
-        return "/manager/did/$this->didId";
     }
 
     /**
@@ -73,7 +60,21 @@ class DeleteDidRequest extends BaseRequest implements HasBody
     protected function defaultBody(): array
     {
         return [
-            'company' => $this->companyId,
+            'company'     => $this->companyId,
         ];
+    }
+
+
+    /**
+     * Define the API endpoint for DID deletion
+     *
+     * Constructs the endpoint URL by incorporating the DID's
+     * unique identifier into the deletion path.
+     *
+     * @return string The API endpoint path
+     */
+    public function resolveEndpoint(): string
+    {
+        return "/manager/did/$this->didId";
     }
 }

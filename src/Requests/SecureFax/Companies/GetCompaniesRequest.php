@@ -34,7 +34,7 @@ class GetCompaniesRequest extends BaseRequest
     /**
      * Initialize a new companies list request
      *
-     * @param  array<string, mixed>|null  $queryParams  Optional query parameters
+     * @param array<string, mixed>|null $queryParams Optional query parameters
      *                                             Example: ['page' => 1, 'per_page' => 20]
      */
     public function __construct(?array $queryParams = null)
@@ -73,7 +73,7 @@ class GetCompaniesRequest extends BaseRequest
     public function defaultQuery(): array
     {
         return array_filter([
-            'page' => $this->queryParams['page'] ?? 1,
+            'page'   => $this->queryParams['page'] ?? 1,
         ]);
     }
 }

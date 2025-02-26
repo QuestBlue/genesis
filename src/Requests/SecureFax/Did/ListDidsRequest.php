@@ -30,7 +30,7 @@ class ListDidsRequest extends Request implements HasBody
     /**
      * ListDidsRequest constructor.
      *
-     * @param  string  $companyId  The ID of the SecureFax company for which DID numbers should be retrieved.
+     * @param string $companyId The ID of the SecureFax company for which DID numbers should be retrieved.
      */
     public function __construct(protected readonly string $companyId) {}
 
@@ -57,7 +57,7 @@ class ListDidsRequest extends Request implements HasBody
     /**
      * Parse the response into a DidListResponse DTO.
      *
-     * @param  array  $data  The raw API response data.
+     * @param array $data The raw API response data.
      *
      * @return DidListData The structured DTO representing the DID list.
      */

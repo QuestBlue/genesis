@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace QuestBlue\Genesis\Requests\SecureFax\Companies;
 
-use JsonException;
 use QuestBlue\Genesis\Data\SecureFax\CompanyData;
 use QuestBlue\Genesis\Enums\Service;
 use QuestBlue\Genesis\Requests\BaseRequest;
@@ -34,9 +33,22 @@ class CreateCompanyRequest extends BaseRequest implements HasBody
     /**
      * Initialize a new create company request
      *
-     * @param  string  $name  The name of the company to create
+     * @param string $name The name of the company to create
      */
     public function __construct(protected readonly string $name) {}
+
+    /**
+     * Define the request body for company creation
+     *
+     * Structures the request payload with the company name and any other
+     * required parameters for company creation.
+     *
+     * @return array<string, mixed> The request payload as an associative array
+     */
+    protected function defaultBody(): array
+    {
+        return ['name' => $this->name];
+    }
 
     /**
      * Define the API endpoint for company creation
@@ -64,27 +76,13 @@ class CreateCompanyRequest extends BaseRequest implements HasBody
      * Transforms the API response into a structured CompanyData object
      * for easier data handling in the application.
      *
-     * @param  Response  $response  The API response
-     *
+     * @param Response $response The API response
      * @return CompanyData The created company data object
      *
-     * @throws JsonException When JSON decoding fails
+     * @throws \JsonException When JSON decoding fails
      */
     public function createDtoFromResponse(Response $response): mixed
     {
         return CompanyData::fromArray($response->json('data.company'));
-    }
-
-    /**
-     * Define the request body for company creation
-     *
-     * Structures the request payload with the company name and any other
-     * required parameters for company creation.
-     *
-     * @return array<string, mixed> The request payload as an associative array
-     */
-    protected function defaultBody(): array
-    {
-        return ['name' => $this->name];
     }
 }
