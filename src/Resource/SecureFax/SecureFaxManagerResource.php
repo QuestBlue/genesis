@@ -32,12 +32,7 @@ class SecureFaxManagerResource extends Resource
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function create(
-        string $fullName,
-        string $email,
-        string $password,
-        string $company,
-    ): Response {
+    public function create(string $fullName, string $email, string $password, string $company): Response {
         return $this->connector->send(new CreateAdministratorRequest($fullName, $email, $password, $company));
     }
 }

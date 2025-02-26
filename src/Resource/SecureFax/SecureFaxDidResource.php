@@ -6,7 +6,10 @@ namespace QuestBlue\Genesis\Resource\SecureFax;
 
 use QuestBlue\Genesis\Requests\SecureFax\Did\CreateDidRequest;
 use QuestBlue\Genesis\Requests\SecureFax\Did\DeleteDidRequest;
+use QuestBlue\Genesis\Requests\SecureFax\Did\ListDidsRequest;
 use QuestBlue\Genesis\Resource\Resource;
+use Saloon\Exceptions\Request\FatalRequestException;
+use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Response;
 
 /**
@@ -19,6 +22,24 @@ use Saloon\Http\Response;
  */
 class SecureFaxDidResource extends Resource
 {
+
+    /**
+     * Retrieve a list of DIDs for a specified company.
+     *
+     * This method sends a request to the SecureFax API to fetch all DIDs associated with a given company.
+     *
+     * @param string $companyId The ID of the company whose DIDs should be listed.
+     *
+     * @return Response The API response containing the list of DIDs.
+     *
+     * @throws FatalRequestException If a fatal error occurs during the request.
+     * @throws RequestException If the request fails due to client or server-side errors.
+     */
+    public function list(string $companyId): Response
+    {
+        return $this->connector->send(new ListDidsRequest($companyId));
+    }
+
     /**
      * Create a new DID in the SecureFax system.
      *

@@ -25,21 +25,21 @@ class GetCompaniesRequest extends BaseRequest
     protected Method $method = Method::GET;
 
     /**
-     * Pagination parameters for the request
+     * Query parameters for pagination and filtering
      *
      * @var array<string, mixed>|null
      */
-    protected ?array $pagination = null;
+    protected ?array $queryParams = null;
 
     /**
      * Initialize a new companies list request
      *
-     * @param array<string, mixed>|null $pagination Optional pagination parameters
-     *                                             Example: ['page' => 1, 'limit' => 20]
+     * @param array<string, mixed>|null $queryParams Optional query parameters
+     *                                             Example: ['page' => 1, 'per_page' => 20]
      */
-    public function __construct(?array $pagination = null)
+    public function __construct(?array $queryParams = null)
     {
-        $this->pagination = $pagination;
+        $this->queryParams = $queryParams;
     }
 
     /**
@@ -73,7 +73,7 @@ class GetCompaniesRequest extends BaseRequest
     public function defaultQuery(): array
     {
         return array_filter([
-            'Pagination' => $this->pagination,
+            'page'   => $this->queryParams['page'] ?? 1,
         ]);
     }
 }

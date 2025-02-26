@@ -6,6 +6,7 @@ namespace QuestBlue\Genesis\Resource\SecureFax;
 
 use QuestBlue\Genesis\Requests\SecureFax\Companies\CreateCompanyRequest;
 use QuestBlue\Genesis\Requests\SecureFax\Companies\DeleteCompanyRequest;
+use QuestBlue\Genesis\Requests\SecureFax\Companies\GetCompaniesRequest;
 use QuestBlue\Genesis\Requests\SecureFax\Companies\LockCompanyRequest;
 use QuestBlue\Genesis\Requests\SecureFax\Companies\UnlockCompanyRequest;
 use QuestBlue\Genesis\Resource\Resource;
@@ -23,6 +24,23 @@ use Throwable;
  */
 class SecureFaxCompanyResource extends Resource
 {
+
+    /**
+     * Retrieve a list of companies from the SecureFax API.
+     *
+     * @param array|null $pagination Optional pagination parameters (e.g., page, per_page).
+     *
+     * @return Response The API response containing the list of companies.
+     *
+     * @throws FatalRequestException If a fatal error occurs during the request.
+     * @throws RequestException If the request fails due to client or server-side errors.
+     * @throws Throwable If any other exception is thrown during execution.
+     */
+    public function list(?array $pagination = null): Response
+    {
+        return $this->connector->send(new GetCompaniesRequest($pagination));
+    }
+
     /**
      * Create a new company in the SecureFax system.
      *

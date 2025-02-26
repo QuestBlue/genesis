@@ -9,7 +9,6 @@ use QuestBlue\Genesis\Enums\Service;
 use QuestBlue\Genesis\Requests\BaseRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 

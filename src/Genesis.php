@@ -193,5 +193,4 @@ class Genesis extends Connector
     {
         return new GenesisException($response);
     }
-
 }

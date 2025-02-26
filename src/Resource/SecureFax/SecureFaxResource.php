@@ -7,20 +7,20 @@ namespace QuestBlue\Genesis\Resource\SecureFax;
 use QuestBlue\Genesis\Resource\Resource;
 
 /**
- * SecureFax Resource Handler
+ * Class SecureFaxResource
  *
- * This class serves as the main entry point for accessing SecureFax-related resources
- * and provides access to various sub-resources like company management.
+ * The main resource handler for SecureFax API interactions.
+ * This class provides access to various sub-resources such as company, user, and DID management.
  */
 class SecureFaxResource extends Resource
 {
     /**
-     * Get the company resource handler
+     * Access the company resource handler.
      *
      * Provides access to company-related operations within the SecureFax system,
-     * such as creating, deleting, locking, and unlocking companies.
+     * including creating, deleting, locking, and unlocking companies.
      *
-     * @return SecureFaxCompanyResource A new instance of the company resource handler
+     * @return SecureFaxCompanyResource A new instance of the company resource handler.
      */
     public function company(): SecureFaxCompanyResource
     {
@@ -30,6 +30,8 @@ class SecureFaxResource extends Resource
     /**
      * Access the users resource of the SecureFax API.
      *
+     * This resource handles user-related operations, such as retrieving, managing, and modifying users.
+     *
      * @return SecureFaxUsersResource The resource for managing user-related operations.
      */
     public function users(): SecureFaxUsersResource
@@ -37,9 +39,15 @@ class SecureFaxResource extends Resource
         return new SecureFaxUsersResource($this->connector);
     }
 
+    /**
+     * Access the DID (Direct Inward Dialing) resource of the SecureFax API.
+     *
+     * This resource allows management of DID numbers, including listing, creating, and deleting them.
+     *
+     * @return SecureFaxDidResource The resource for managing DID-related operations.
+     */
     public function did(): SecureFaxDidResource
     {
         return new SecureFaxDidResource($this->connector);
     }
-
 }
