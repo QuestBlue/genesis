@@ -36,10 +36,10 @@ class CreateDidRequest extends BaseRequest implements HasBody
     /**
      * Initialize a new DID creation request
      *
-     * @param string      $number      The telephone number to be registered as DID
-     * @param string      $company     The company's unique identifier (UUID)
-     * @param string|null $description Optional description to identify the DID's purpose
-     * @param string|null $name        Optional friendly name for the DID
+     * @param  string  $number  The telephone number to be registered as DID
+     * @param  string  $company  The company's unique identifier (UUID)
+     * @param  string|null  $description  Optional description to identify the DID's purpose
+     * @param  string|null  $name  Optional friendly name for the DID
      */
     public function __construct(
         protected readonly string $number,

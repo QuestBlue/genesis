@@ -10,8 +10,8 @@ namespace QuestBlue\Genesis\Data\SecureFax\Did;
 readonly class DidListData
 {
     /**
-     * @param DidData[] $dids The list of retrieved DID numbers.
-     * @param int $total The total count of DID numbers.
+     * @param  DidData[]  $dids  The list of retrieved DID numbers.
+     * @param  int  $total  The total count of DID numbers.
      */
     public function __construct(
         public array $dids,
@@ -21,12 +21,12 @@ readonly class DidListData
     /**
      * Create a DidListData instance from an API response array.
      *
-     * @param array{
+     * @param  array{
      *     data: array{
      *         dids: array<array{id: string, number: string, description?: string|null}>
      *     },
      *     meta: array{total: int}
-     * } $data The API response array.
+     * }  $data  The API response array.
      *
      * @return self A new DidListData instance.
      */
