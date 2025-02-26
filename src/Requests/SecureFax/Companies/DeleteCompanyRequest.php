@@ -31,11 +31,26 @@ class DeleteCompanyRequest extends BaseRequest implements HasBody
     /**
      * Initialize a new delete company request
      *
-     * @param  string  $companyId  The unique identifier of the company to delete
+     * @param string $companyId The unique identifier of the company to delete
      */
     public function __construct(
         protected readonly string $companyId,
     ) {}
+
+    /**
+     * Define the request body for company deletion
+     *
+     * Structures the request payload with the company ID required
+     * for the deletion operation.
+     *
+     * @return array<string, string> The request payload as an associative array
+     */
+    protected function defaultBody(): array
+    {
+        return [
+            'id' => $this->companyId,
+        ];
+    }
 
     /**
      * Specify the service this request belongs to
@@ -57,21 +72,6 @@ class DeleteCompanyRequest extends BaseRequest implements HasBody
      */
     public function resolveEndpoint(): string
     {
-        return '/manager/company/delete/'.$this->companyId;
-    }
-
-    /**
-     * Define the request body for company deletion
-     *
-     * Structures the request payload with the company ID required
-     * for the deletion operation.
-     *
-     * @return array<string, string> The request payload as an associative array
-     */
-    protected function defaultBody(): array
-    {
-        return [
-            'id' => $this->companyId,
-        ];
+        return '/manager/company/delete/' . $this->companyId;
     }
 }

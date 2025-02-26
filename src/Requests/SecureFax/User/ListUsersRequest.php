@@ -33,7 +33,7 @@ class ListUsersRequest extends BaseRequest
     /**
      * Initialize a new users list request.
      *
-     * @param  array<string, mixed>|null  $queryParams  Optional query parameters for filtering and pagination.
+     * @param array<string, mixed>|null $queryParams Optional query parameters for filtering and pagination.
      *                                               Example: ['page' => 1, 'per_page' => 20]
      */
     public function __construct(?array $queryParams = null)

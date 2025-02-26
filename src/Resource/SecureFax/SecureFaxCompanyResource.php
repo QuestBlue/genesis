@@ -28,7 +28,7 @@ class SecureFaxCompanyResource extends Resource
     /**
      * Retrieve a list of companies from the SecureFax API.
      *
-     * @param  array|null  $pagination  Optional pagination parameters (e.g., page, per_page).
+     * @param array|null $pagination Optional pagination parameters (e.g., page, per_page).
      *
      * @return Response The API response containing the list of companies.
      *
@@ -47,7 +47,7 @@ class SecureFaxCompanyResource extends Resource
      * This method sends a request to create a new company with the specified name.
      * The created company will be available for secure fax operations.
      *
-     * @param  string  $name  The name of the company to be created.
+     * @param string $name The name of the company to be created.
      *
      * @return Response The API response containing the details of the newly created company.
      *
@@ -66,7 +66,7 @@ class SecureFaxCompanyResource extends Resource
      * This method permanently removes a company and all its associated data
      * from the SecureFax system. This action cannot be undone.
      *
-     * @param  string  $id  The unique identifier of the company to be deleted.
+     * @param string $id The unique identifier of the company to be deleted.
      *
      * @return Response The API response confirming the deletion of the company.
      *
@@ -86,7 +86,7 @@ class SecureFaxCompanyResource extends Resource
      * This is typically used for temporary suspension of company activities while maintaining
      * their data and configuration.
      *
-     * @param  string  $id  The unique identifier of the company to be locked.
+     * @param string $id The unique identifier of the company to be locked.
      *
      * @return Response The API response confirming the company has been locked.
      *
@@ -105,7 +105,7 @@ class SecureFaxCompanyResource extends Resource
      * Unlocking a company restores its full functionality in the SecureFax system,
      * allowing it to resume normal operations. This reverses the effects of the lock operation.
      *
-     * @param  string  $id  The unique identifier of the company to be unlocked.
+     * @param string $id The unique identifier of the company to be unlocked.
      *
      * @return Response The API response confirming the company has been unlocked.
      *

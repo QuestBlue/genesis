@@ -39,10 +39,10 @@ class CreateAdministratorRequest extends BaseRequest implements HasBody
     /**
      * Initialize a new administrator creation request
      *
-     * @param  string|null  $fullName  The administrator's full name (optional)
-     * @param  string  $email  The administrator's email address (used for login)
-     * @param  string  $password  The administrator's initial password
-     * @param  string  $company  The UUID of the company the administrator will manage
+     * @param string|null $fullName The administrator's full name (optional)
+     * @param string      $email    The administrator's email address (used for login)
+     * @param string      $password The administrator's initial password
+     * @param string      $company  The UUID of the company the administrator will manage
      */
     public function __construct(
         protected readonly ?string $fullName,
@@ -50,6 +50,29 @@ class CreateAdministratorRequest extends BaseRequest implements HasBody
         protected readonly string $password,
         protected readonly string $company,
     ) {}
+
+    /**
+     * Construct the request payload for administrator creation
+     *
+     * Builds an array containing all administrator information
+     * that will be converted to JSON for the request body.
+     *
+     * @return array{
+     *     fullname: string|null,
+     *     email: string,
+     *     password: string,
+     *     company: string
+     * }
+     */
+    protected function defaultBody(): array
+    {
+        return [
+            'fullname' => $this->fullName,
+            'email'    => $this->email,
+            'password' => $this->password,
+            'company'  => $this->company,
+        ];
+    }
 
     /**
      * Define the API endpoint for administrator creation
@@ -82,28 +105,5 @@ class CreateAdministratorRequest extends BaseRequest implements HasBody
     public function createDtoFromResponse(Response $response): mixed
     {
         return UserData::fromArray($response->json('data.user'));
-    }
-
-    /**
-     * Construct the request payload for administrator creation
-     *
-     * Builds an array containing all administrator information
-     * that will be converted to JSON for the request body.
-     *
-     * @return array{
-     *     fullname: string|null,
-     *     email: string,
-     *     password: string,
-     *     company: string
-     * }
-     */
-    protected function defaultBody(): array
-    {
-        return [
-            'fullname' => $this->fullName,
-            'email'    => $this->email,
-            'password' => $this->password,
-            'company'  => $this->company,
-        ];
     }
 }

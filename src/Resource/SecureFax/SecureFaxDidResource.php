@@ -28,7 +28,7 @@ class SecureFaxDidResource extends Resource
      *
      * This method sends a request to the SecureFax API to fetch all DIDs associated with a given company.
      *
-     * @param  string  $companyId  The ID of the company whose DIDs should be listed.
+     * @param string $companyId The ID of the company whose DIDs should be listed.
      *
      * @return Response The API response containing the list of DIDs.
      *
@@ -45,10 +45,10 @@ class SecureFaxDidResource extends Resource
      *
      * Sends a request to create a new DID (Direct Inward Dialing) number.
      *
-     * @param  string  $number  The telephone number to assign as a DID.
-     * @param  string  $company  The company ID associated with the DID.
-     * @param  string|null  $description  An optional description for the DID.
-     * @param  string|null  $name  An optional name label for the DID.
+     * @param string      $number      The telephone number to assign as a DID.
+     * @param string      $company     The company ID associated with the DID.
+     * @param string|null $description An optional description for the DID.
+     * @param string|null $name        An optional name label for the DID.
      *
      * @return Response The API response containing the newly created DID details.
      */
@@ -62,8 +62,8 @@ class SecureFaxDidResource extends Resource
      *
      * Sends a request to remove a DID by its identifier and company ID.
      *
-     * @param  string  $didId  The unique identifier of the DID to be deleted.
-     * @param  string  $companyId  The company ID associated with the DID.
+     * @param string $didId     The unique identifier of the DID to be deleted.
+     * @param string $companyId The company ID associated with the DID.
      *
      * @return Response The API response confirming the deletion status.
      */

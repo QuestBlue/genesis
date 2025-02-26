@@ -46,4 +46,5 @@ class SecureFaxUsersResource extends Resource
     {
         return new SecureFaxManagerResource($this->connector);
     }
+
 }
