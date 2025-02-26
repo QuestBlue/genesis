@@ -13,9 +13,9 @@ readonly class DidData
     /**
      * Create a new DID data instance.
      *
-     * @param string $id          Unique identifier of the DID.
-     * @param string $number      The phone number associated with the DID.
-     * @param string|null $description Optional description of the DID.
+     * @param  string  $id  Unique identifier of the DID.
+     * @param  string  $number  The phone number associated with the DID.
+     * @param  string|null  $description  Optional description of the DID.
      */
     public function __construct(
         public string $id,
@@ -29,11 +29,11 @@ readonly class DidData
      * Constructs a new DidData object from an associative array
      * containing DID information.
      *
-     * @param array{
+     * @param  array{
      *     id: string,
      *     number: string,
      *     description?: string|null
-     * } $data Array containing DID data.
+     * }  $data  Array containing DID data.
      *
      * @return self New DidData instance.
      */

@@ -36,33 +36,17 @@ class Genesis extends Connector
     /**
      * Initialize a new Genesis API connector instance
      *
-     * @param string|null $username API username for basic authentication
-     * @param string|null $password API password for basic authentication
-     * @param string|null $apiKey Security key for header authentication
-     * @param bool $sandbox Whether to use sandbox environment
+     * @param  string|null  $username  API username for basic authentication
+     * @param  string|null  $password  API password for basic authentication
+     * @param  string|null  $apiKey  Security key for header authentication
+     * @param  bool  $sandbox  Whether to use sandbox environment
      */
     public function __construct(
         protected ?string $username = null,
         protected ?string $password = null,
         protected ?string $apiKey = null,
         protected ?bool $sandbox = false
-    ) {
-    }
-
-    /**
-     * Configure the default authentication for API requests
-     *
-     * Combines both basic auth (username/password) and header auth (API key)
-     *
-     * @return MultiAuthenticator
-     */
-    protected function defaultAuth(): MultiAuthenticator
-    {
-        return new MultiAuthenticator(
-            new BasicAuthenticator($this->username, $this->password),
-            new HeaderAuthenticator($this->apiKey, 'Security-key'),
-        );
-    }
+    ) {}
 
     /**
      * Resolve the base URL for the QuestBlue API.
@@ -75,10 +59,21 @@ class Genesis extends Connector
     }
 
     /**
+     * Check if the current environment is sandbox
+     *
+     * @return bool
+     */
+    private function isSandboxEnvironment(): bool
+    {
+        return $this->sandbox;
+    }
+
+    /**
      * Creates a pending request with the appropriate service configuration
      *
-     * @param Request $request The request to be processed
-     * @param MockClient|null $mockClient Optional mock client for testing
+     * @param  Request  $request  The request to be processed
+     * @param  MockClient|null  $mockClient  Optional mock client for testing
+     *
      * @return PendingRequest
      */
     public function createPendingRequest(Request $request, MockClient $mockClient = null): PendingRequest
@@ -104,7 +99,8 @@ class Genesis extends Connector
     /**
      * Set the service to be used for API requests
      *
-     * @param Service $service The service to be used
+     * @param  Service  $service  The service to be used
+     *
      * @return self
      */
     public function service(Service $service): self
@@ -116,7 +112,8 @@ class Genesis extends Connector
     /**
      * Set the username for API authentication
      *
-     * @param string $username The username to be used
+     * @param  string  $username  The username to be used
+     *
      * @return self
      */
     public function username(string $username): self
@@ -128,7 +125,8 @@ class Genesis extends Connector
     /**
      * Set the password for API authentication
      *
-     * @param string $password The password to be used
+     * @param  string  $password  The password to be used
+     *
      * @return self
      */
     public function password(string $password): self
@@ -140,7 +138,8 @@ class Genesis extends Connector
     /**
      * Set the API key for header authentication
      *
-     * @param string $apiKey The API key to be used
+     * @param  string  $apiKey  The API key to be used
+     *
      * @return self
      */
     public function apiKey(string $apiKey): self
@@ -152,23 +151,14 @@ class Genesis extends Connector
     /**
      * Set whether to use sandbox environment
      *
-     * @param bool $sandbox True to use sandbox environment, false for production
+     * @param  bool  $sandbox  True to use sandbox environment, false for production
+     *
      * @return self
      */
     public function sandbox(bool $sandbox): self
     {
         $this->sandbox = $sandbox;
         return $this;
-    }
-
-    /**
-     * Check if the current environment is sandbox
-     *
-     * @return bool
-     */
-    private function isSandboxEnvironment(): bool
-    {
-        return $this->sandbox;
     }
 
     /**
@@ -192,5 +182,20 @@ class Genesis extends Connector
     public function getRequestException(Response $response, ?Throwable $senderException): ?Throwable
     {
         return new GenesisException($response);
+    }
+
+    /**
+     * Configure the default authentication for API requests
+     *
+     * Combines both basic auth (username/password) and header auth (API key)
+     *
+     * @return MultiAuthenticator
+     */
+    protected function defaultAuth(): MultiAuthenticator
+    {
+        return new MultiAuthenticator(
+            new BasicAuthenticator($this->username, $this->password),
+            new HeaderAuthenticator($this->apiKey, 'Security-key'),
+        );
     }
 }

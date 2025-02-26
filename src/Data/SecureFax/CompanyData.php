@@ -13,19 +13,17 @@ readonly class CompanyData
     /**
      * Create a new company data instance
      *
-     * @param string $id Unique identifier of the company
-     * @param string $name Name of the company
-     * @param string $timezone Company's operating timezone
-     * @param bool $locked Whether the company is currently locked
+     * @param  string  $id  Unique identifier of the company
+     * @param  string  $name  Name of the company
+     * @param  string  $timezone  Company's operating timezone
+     * @param  bool  $locked  Whether the company is currently locked
      */
     public function __construct(
         public string $id,
         public string $name,
         public string $timezone,
-        public bool   $locked,
-    )
-    {
-    }
+        public bool $locked,
+    ) {}
 
     /**
      * Create a CompanyData instance from an array
@@ -33,12 +31,12 @@ readonly class CompanyData
      * Constructs a new CompanyData object from an associative array
      * containing company information.
      *
-     * @param array{
+     * @param  array{
      *     id: string,
      *     name: string,
      *     timezone: string,
      *     locked: string|bool
-     * } $data Array containing company data
+     * }  $data  Array containing company data
      *
      * @return self New CompanyData instance
      */

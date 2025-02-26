@@ -23,7 +23,7 @@ class Resource
     /**
      * Initialize a new resource instance
      *
-     * @param Connector $connector The API connector instance used for making HTTP requests
+     * @param  Connector  $connector  The API connector instance used for making HTTP requests
      */
     public function __construct(public Connector $connector) {}
 }

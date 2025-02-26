@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace QuestBlue\Genesis\Requests\SecureFax\Companies;
 
+use JsonException;
 use QuestBlue\Genesis\Data\SecureFax\CompanyData;
 use QuestBlue\Genesis\Enums\Service;
 use QuestBlue\Genesis\Requests\BaseRequest;
@@ -33,7 +34,7 @@ class LockCompanyRequest extends BaseRequest implements HasBody
     /**
      * Initialize a new lock company request
      *
-     * @param string $companyId The unique identifier of the company to lock
+     * @param  string  $companyId  The unique identifier of the company to lock
      */
     public function __construct(protected readonly string $companyId) {}
 
@@ -66,10 +67,11 @@ class LockCompanyRequest extends BaseRequest implements HasBody
      * Transforms the API response into a structured CompanyData object
      * containing the locked company's updated information.
      *
-     * @param Response $response The API response
+     * @param  Response  $response  The API response
+     *
      * @return CompanyData The company data object with updated lock status
      *
-     * @throws \JsonException When JSON decoding fails
+     * @throws JsonException When JSON decoding fails
      */
     public function createDtoFromResponse(Response $response): mixed
     {

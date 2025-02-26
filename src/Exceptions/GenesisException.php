@@ -26,7 +26,7 @@ class GenesisException extends Exception
     /**
      * GenesisException constructor.
      *
-     * @param SaloonResponse $response The API response containing error details.
+     * @param  SaloonResponse  $response  The API response containing error details.
      */
     public function __construct(SaloonResponse $response)
     {
@@ -37,7 +37,8 @@ class GenesisException extends Exception
     /**
      * Extracts the error message from the API response.
      *
-     * @param SaloonResponse $response The response from the API.
+     * @param  SaloonResponse  $response  The response from the API.
+     *
      * @return string The extracted error message or a default message if unavailable.
      */
     private static function extractErrorMessage(SaloonResponse $response): string
@@ -50,7 +51,7 @@ class GenesisException extends Exception
             $data = $response->json('message');
             return $data ?? 'An unknown error occurred';
         } catch (Throwable $e) {
-            return 'Error extracting response message: ' . $response->body();
+            return 'Error extracting response message: '.$response->body();
         }
     }
 
