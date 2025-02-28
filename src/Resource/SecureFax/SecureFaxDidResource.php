@@ -6,6 +6,7 @@ namespace QuestBlue\Genesis\Resource\SecureFax;
 
 use QuestBlue\Genesis\Requests\SecureFax\Did\CreateDidRequest;
 use QuestBlue\Genesis\Requests\SecureFax\Did\DeleteDidRequest;
+use QuestBlue\Genesis\Requests\SecureFax\Did\ListAvailableDidsRequest;
 use QuestBlue\Genesis\Requests\SecureFax\Did\ListDidsRequest;
 use QuestBlue\Genesis\Resource\Resource;
 use Saloon\Exceptions\Request\FatalRequestException;
@@ -41,6 +42,21 @@ class SecureFaxDidResource extends Resource
     }
 
     /**
+     * Retrieve a list of available DIDs for the authenticated QuestBlue user.
+     *
+     * This method sends a request to the QuestBlue API to fetch all DIDs available to be routed.
+     *
+     * @return Response The API response containing the list of DIDs.
+     *
+     * @throws FatalRequestException If a fatal error occurs during the request.
+     * @throws RequestException If the request fails due to client or server-side errors.
+     */
+    public function available(): Response
+    {
+        return $this->connector->send(new ListAvailableDidsRequest());
+    }
+
+    /**
      * Create a new DID in the SecureFax system.
      *
      * Sends a request to create a new DID (Direct Inward Dialing) number.
@@ -67,8 +83,8 @@ class SecureFaxDidResource extends Resource
      *
      * @return Response The API response confirming the deletion status.
      */
-    public function delete(string $didId, string $companyId): Response
+    public function delete(string $didId): Response
     {
-        return $this->connector->send(new DeleteDidRequest($didId, $companyId));
+        return $this->connector->send(new DeleteDidRequest($didId));
     }
 }

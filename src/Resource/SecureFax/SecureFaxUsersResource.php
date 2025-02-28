@@ -19,20 +19,13 @@ class SecureFaxUsersResource extends Resource
 {
 
     /**
-     * Retrieve a list of users
-     *
-     * Fetches a list of users with optional pagination parameters to control
-     * the subset of results returned.
-     *
-     * @param  array|null  $pagination  Optional associative array for pagination parameters (e.g., page number, limit).
-     *
+     * Retrieve a list of users in the SecureFax Api
      * @return Response The response object containing the list of users and metadata.
      */
-    public function list(?array $pagination = null): Response
+    public function list(): Response
     {
-        return $this->connector->send(new ListUsersRequest($pagination));
+        return $this->connector->send(new ListUsersRequest());
     }
-
 
     /**
      * Get the administrator resource handler
