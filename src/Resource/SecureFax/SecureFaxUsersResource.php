@@ -27,7 +27,6 @@ class SecureFaxUsersResource extends Resource
         return $this->connector->send(new ListUsersRequest());
     }
 
-
     /**
      * Get the administrator resource handler
      *
